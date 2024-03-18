@@ -1,0 +1,270 @@
+root@ip-172-31-41-40:/var/www# cd www.learningwithabishek.com/
+root@ip-172-31-41-40:/var/www/www.learningwithabishek.com# cat index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:  url('https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .learning-tools-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #tools-section {
+            display: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Learning World</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Welcome to Learning World!</h2>
+        <img src="https://as1.ftcdn.net/v2/jpg/05/10/71/04/1000_F_510710413_73ZPDy2BXCa66rTWYESqHGcTuH32lqyF.jpg" alt="Learning World Logo" width="300">
+        <p>Click on the "Learning Tools" button to explore our tools</p>
+        <button id="learning-tools-btn" class="learning-tools-btn">Learning Tools</button>
+    </section>
+    <section id="tools-section">
+        <h2>Learning Tools</h2>
+
+        <h4><a href="https://ansible.learningwithabishek.com/" target="_blank">Ansible</a></h4>
+        <h4><a href="http://nginx.learningwithabishek.com" target="_blank">Nginx</a></h4>
+        <h4><a href="http://apache.learningwithabishek.com" target="_blank">Apache</a></h4>
+        <h4><a href="http://awsmigration.learning.com" target="_blank">AWS Migration Hub</a></h4>
+        <h4><a href="https://docker.learningwithabishek.com" target="_blank">Docker</a></h4>
+        <h4><a href="https://kubernetes.learningwithabishek.com" target="_blank">Kubernetes</a></h4>
+
+    </section>
+    <footer>
+        <p>&copy; 2024 Learning World. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("learning-tools-btn").addEventListener("click", function() {
+            var toolsSection = document.getElementById("tools-section");
+            if (toolsSection.style.display === "none") {
+                toolsSection.style.display = "block";
+            } else {
+                toolsSection.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+#######################################################################################################################
+root@ip-172-31-41-40:~# cat /etc/nginx/conf.d/default.conf
+server {
+
+       server_name docker.learningwithabishek.com;
+
+       root /var/www/docker.learningwithabishek.com;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/docker.learningwithabishek.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/docker.learningwithabishek.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+
+       server_name kubernetes.learningwithabishek.com;
+
+       root /var/www/kubernetes.learningwithabishek.com;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/kubernetes.learningwithabishek.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/kubernetes.learningwithabishek.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+server {
+
+       server_name www.learningwithabishek.com;
+
+       root /var/www/www.learningwithabishek.com;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/www.learningwithabishek.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.learningwithabishek.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+
+       server_name ansible.learningwithabishek.com;
+
+       root /var/www/ansible.learningwithabishek.com;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/ansible.learningwithabishek.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/ansible.learningwithabishek.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+
+
+server {
+    if ($host = www.learningwithabishek.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+       listen 80;
+       listen [::]:80;
+
+       server_name www.learningwithabishek.com;
+    return 404; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = ansible.learningwithabishek.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+       listen 80;
+       listen [::]:80;
+
+       server_name ansible.learningwithabishek.com;
+    return 404; # managed by Certbot
+
+
+}server {
+    if ($host = docker.learningwithabishek.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+       listen 80;
+       listen [::]:80;
+
+       server_name docker.learningwithabishek.com;
+    return 404; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = kubernetes.learningwithabishek.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+       listen 80;
+       listen [::]:80;
+
+       server_name kubernetes.learningwithabishek.com;
+    return 404; # managed by Certbot
+
+
+}root@ip-172-31-41-40:~# 54.167.230.186
+
+
+###################################################################################################################################
